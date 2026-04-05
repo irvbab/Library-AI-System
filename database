@@ -1,0 +1,41 @@
+import sqlite3
+import pandas as pd
+import os
+
+def setup_database():
+    dossier = os.path.dirname(os.path.abspath(__file__))
+    chemin_csv = os.path.join(dossier, "clean_books_data.csv")
+    chemin_db = os.path.join(dossier, "library.db")
+
+    # 1. Connexion à SQLite (crée le fichier s'il n'existe pas)
+    conn = sqlite3.connect(chemin_db)
+    cursor = conn.cursor()
+
+    # 2. Création de la table (Bloc 1 - C2)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS books (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titre TEXT NOT NULL,
+            auteurs TEXT,
+            description TEXT,
+            isbn TEXT
+        )
+    ''')
+    
+    # 3. Chargement des données du CSV
+    df = pd.read_csv(chemin_csv)
+    
+    # 4. Insertion des données (Transfert du CSV vers SQL)
+    df.to_sql('books', conn, if_exists='replace', index=False)
+
+    print(f"✅ Base de données créée avec succès : {chemin_db}")
+    
+    # 5. Vérification
+    cursor.execute("SELECT COUNT(*) FROM books")
+    count = cursor.fetchone()[0]
+    print(f"📊 Nombre de livres insérés dans la table SQL : {count}")
+
+    conn.close()
+
+if __name__ == "__main__":
+    setup_database()
