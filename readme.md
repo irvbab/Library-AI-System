@@ -1,18 +1,57 @@
-# Système de Recommandation pour une Librairie 📚
+# 📚 Système de Recommandation Intelligente - Librairie
 
-Ce projet a pour but de recommander des livres aux utilisateurs en fonction de leurs goûts en utilisant des techniques d'Intelligence Artificielle (NLP).
+## 📖 Présentation du Projet
+Ce projet consiste en une solution logicielle complète pour une librairie, intégrant un moteur de recommandation basé sur le Traitement du Langage Naturel (NLP). Il permet d'automatiser la suggestion d'ouvrages en fonction de la similarité sémantique des descriptions.
 
-## 🚀 Étape 1 : Préparation des données (Bloc 1)
-L'objectif était de créer un catalogue de livres structuré à partir de sources externes.
+---
 
-### Architecture du Pipeline :
-1. **Collecte** (`collect_data.py`) : Extraction de 145 livres via l'API Google Books.
-2. **Nettoyage** (`prepare_data.py`) : Traitement des données avec Pandas (suppression des doublons, nettoyage HTML).
-3. **Stockage** (`database_setup.py`) : Insertion des données nettoyées dans une base de données SQLite (`library.db`).
+## 🏗️ Architecture du Système
+Le projet est structuré selon une approche modulaire pour séparer les responsabilités (Socle de la compétence **C5**) :
 
-## 🛠️ Installation
-```bash
-pip install pandas
-python collect_data.py
-python prepare_data.py
-python database_setup.py
+* **`app.py`** : Interface utilisateur (Frontend) développée avec Streamlit.
+* **`api.py`** : Serveur d'exposition des données (Backend) via FastAPI.
+* **`library.db`** : Base de données relationnelle SQLite3.
+* **`test_api.py`** : Suite de tests automatisés (Qualité logicielle).
+* **`requirements.txt`** : Gestionnaire des dépendances.
+
+---
+
+## 🧪 Détails des Compétences Validées
+
+### 1. Analyse et Traitement de Données (Bloc E3)
+* **Vectorisation TF-IDF :** Transformation du texte en vecteurs numériques pour capturer l'importance des mots-clés.
+* **Similarité Cosinus :** Algorithme de calcul de distance entre vecteurs pour identifier les livres les plus proches.
+
+### 2. Développement Backend & API (Bloc E3/E4)
+* Exposition de points de terminaison (endpoints) RESTful.
+* Documentation automatique via **Swagger UI** (disponible sur `/docs`).
+
+### 3. Qualité et Maintenance (Bloc E4)
+* **Tests Unitaires :** Validation des endpoints et de la connectivité DB avec Pytest.
+* **Versionnage :** Utilisation rigoureuse de Git avec un fichier `.gitignore` optimisé.
+
+---
+
+## ⚙️ Installation et Déploiement
+
+### Prérequis
+* Python 3.10+
+* Pip (gestionnaire de paquets)
+
+### Installation
+1. `git clone https://github.com/irvbab/Library-AI-System.git`
+2. `pip install -r requirements.txt`
+
+### Exécution
+* **Lancer l'API :** `uvicorn api:app --reload`
+* **Lancer l'IHM :** `streamlit run app.py`
+
+---
+
+## 📊 Schéma de Fonctionnement
+
+
+1. L'utilisateur saisit un livre dans **Streamlit**.
+2. Streamlit interroge l'**API FastAPI**.
+3. L'API exécute le script de **recommandation (TF-IDF)** sur la base **SQLite**.
+4. Les résultats sont renvoyés et affichés en temps réel.
