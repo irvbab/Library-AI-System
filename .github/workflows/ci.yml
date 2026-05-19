@@ -15,8 +15,8 @@ jobs:
       - name: Dépendances
         run: |
           if [ -f requirements.txt ]; then 
-            # Supprime la bibliothèque Windows pywin32 pour éviter le plantage sous Linux
-            sed -i '/pywin32/d' requirements.txt
+            # Supprime TOUTES les dépendances Windows (pywin32 et pypiwin32)
+            sed -i '/win32/d' requirements.txt
             pip install -r requirements.txt
           fi
           pip install pytest
