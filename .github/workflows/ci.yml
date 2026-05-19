@@ -1,0 +1,22 @@
+name: Library AI System — CI Pipeline C13
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Dépendances
+        run: pip install -r requirements.txt
+
+      - name: Initialisation Base SQLite
+        run: python database.py
+
+      - name: Validation Pytest
+        run: pytest test_api.py -v
