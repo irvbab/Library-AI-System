@@ -19,4 +19,4 @@ jobs:
         run: python database.py
 
       - name: Validation Pytest
-        run: pytest test_api.py -v
+        run: pytest test_api.py test_recommendations.py -v
