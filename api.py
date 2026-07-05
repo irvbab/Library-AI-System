@@ -54,6 +54,24 @@ LOGIN_FORM_HTML = """
 </html>
 """
 
+ENDPOINTS_HTML = """
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Library AI API</title></head>
+<body style="font-family: Arial, sans-serif; max-width: 480px; margin: 80px auto;">
+    <h2>Bienvenue sur l'API de la Librairie IA</h2>
+    <p>Vous êtes authentifié. Voici les endpoints disponibles :</p>
+    <ul>
+        <li><a href="/docs">/docs</a> — documentation interactive (Swagger)</li>
+        <li><code>/recommend/{book_id}</code> — recommandations pour un livre</li>
+    </ul>
+    <form method="post" action="/logout">
+        <button type="submit" style="padding: 8px 16px;">Se déconnecter</button>
+    </form>
+</body>
+</html>
+"""
+
 
 def get_db_connection():
     """Ouvre une connexion à library.db avec accès aux colonnes par nom."""
